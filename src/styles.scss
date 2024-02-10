@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+
+// colors
+$red: #fb4d45;
+$redDark: #c63a33;
+$black: #262626;
+$gray: #496a7f;
+$grayLight: #d8dbdb;
+$accent: #fbfbfb;
+
+* {
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    color: azure;
+
+    background-color: $red
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    background-color: $redDark;
+}
+
+.content {
+    display: flex;
+    height: 100%;
+}
+
+.pokemon-list {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+  }
+
+.pokemon-list-element {
+    box-sizing: border-box;
+    width: 33.33%;
+    margin-bottom: 20px;
+    padding: 0px 10px;
+}
+
+.pokemon-displayer {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: $accent;
+}
+
+.pokemon-displayer.expanded {
+    height: auto;
+    width: auto;
+}
+
+
+.pokemon-legend {
+    
+}
+
+.pokemon-name {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $black;
+    margin-bottom: -4%;
+}
+
+.pokemon-id {
+
+}
+
+.pokemon-type {
+
+}
+
+.pokemon-details {
+    display: flex;
+}
+
+.pokemon-height,
+.pokemon-weight {
+    margin-right: 20px; /* Add spacing between height and weight */
+}
+
+.pokemon-display-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

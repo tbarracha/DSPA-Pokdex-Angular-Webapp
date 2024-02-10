@@ -1,0 +1,17 @@
+<div *ngIf="pokemon">
+    <div class="pokemon-display-img">
+        <img [src]="pokemon.spriteURL" [alt]="pokemon.name">
+    </div>
+    
+    <div class="pokemon-legend">
+        <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
+        <p class="pokemon-id">ID: {{ pokemon.id }}</p>
+    </div>
+
+    <div class="pokemon-details">
+        <p class="pokemon-height">Height: {{ pokemon.height }} m</p>
+        <p class="pokemon-weight">Weight: {{ pokemon.weight }} kg</p>
+    </div>
+
+    <p class="pokemon-type">{{ pokemon.types.join(', ') }}</p>
+</div>

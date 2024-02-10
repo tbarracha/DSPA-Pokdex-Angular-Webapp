@@ -1,0 +1,10 @@
+<div *ngIf="pokemon" (click)="displayPokemonDetails()">
+    <img [src]="pokemon.spriteURL" [alt]="pokemon.name">
+    
+    <div class="pokemon-legend">
+        <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
+        <p class="pokemon-id">ID: {{ pokemon.id }}</p>
+    </div>
+
+    <p class="pokemon-type">{{ pokemon.types.join(', ') }}</p>
+</div>
