@@ -1,6 +1,6 @@
-<div *ngIf="pokemon">
+<div class="pokemon-displayer-content" *ngIf="pokemon">
     <div class="pokemon-display-img">
-        <img [src]="pokemon.spriteURL" [alt]="pokemon.name">
+        <img [src]="pokemon.spriteURL" [alt]="pokemon.name" (click)="playPokemonCry()">
     </div>
     
     <div class="pokemon-details">

@@ -39,6 +39,12 @@ body {
     margin: 0;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .header {
     display: flex;
     justify-content: center;
@@ -103,6 +109,10 @@ input {
     align-items: center;
 }
 
+.pokemon-displayer-content {
+    width: 80%;
+}
+
 .pokemon-displayer.expanded {
     height: auto;
     width: auto;
@@ -131,10 +141,6 @@ input {
 
 .pokemon-details {
     margin: 16px 8px 0px 8px;
-}
-
-.pokemon-name-type {
-    
 }
 
 .pokemon-name-type p {
@@ -172,11 +178,6 @@ input {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-}
-
-
-.pokemon-type {
-    
 }
 
 .normal {
@@ -249,4 +250,15 @@ input {
 
 .fairy {
     @include pokemonTypeBean($type-fairy, $accent);
+}
+
+.cry-button button {
+    height: 24px;
+    width: 128px;
+    
+    border: 0;
+    outline: 0;
+    background-color: $grayLight;
+    color: $accent;
+    border-radius: 16px;
 }

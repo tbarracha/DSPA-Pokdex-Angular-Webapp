@@ -25,4 +25,13 @@ export class PokemonDisplayerComponent {
 
     this.pokemon = pokemon;
   }
+
+  playPokemonCry() {
+    if (this.pokemon == null) {
+      return;
+    }
+
+    const audio = new Audio(this.pokemon?.cry);
+    audio.play();
+  }
 }

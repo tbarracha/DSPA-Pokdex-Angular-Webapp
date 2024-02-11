@@ -65,21 +65,13 @@ export class PokeDataService {
       spriteURL: data.sprites.front_default,
       types: data.types.map((type: any) => type.type.name),
       height: data.height,
-      weight: data.weight
+      weight: data.weight,
+      cry: data.cries.latest,
     };
+
+    //console.log(pokemon);
+    //console.log(data.cries);
     this.cachedPokemon[data.id] = pokemon;
     return pokemon;
-  }
-
-  getPokemonTypeColor(type: string): string {
-    switch (type.toLowerCase()) {
-      case 'fire':
-        return '#FF5733'; // Example color for Fire type
-      case 'water':
-        return '#3399FF'; // Example color for Water type
-      // Add cases for other types
-      default:
-        return '#000000'; // Default color
-    }
   }
 }

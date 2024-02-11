@@ -16,6 +16,7 @@ import { PokemonDisplayerComponent } from './components/pokemon-displayer/pokemo
 import { SearchBarComponent } from './components/searchbar/searchbar.component';
 import { PokemonListElementComponent } from './components/pokemon-list-element/pokemon-list-element.component';
 import { PokemonTypeDirective } from './directives/pokemon-type.directive';
+import { PokemonCryComponent } from './components/pokemon-cry/pokemon-cry.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PokemonTypeDirective } from './directives/pokemon-type.directive';
     SearchBarComponent,
     ContentComponent,
     PokemonListElementComponent,
-    PokemonTypeDirective
+    PokemonTypeDirective,
+    PokemonCryComponent
   ],
   imports: [
     BrowserModule,
