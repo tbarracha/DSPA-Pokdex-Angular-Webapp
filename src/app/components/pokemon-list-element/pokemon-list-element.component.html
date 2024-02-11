@@ -1,10 +1,20 @@
 <div *ngIf="pokemon" (click)="displayPokemonDetails()">
-    <img [src]="pokemon.spriteURL" [alt]="pokemon.name">
-    
-    <div class="pokemon-legend">
-        <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
-        <p class="pokemon-id">ID: {{ pokemon.id }}</p>
+    <div class="pokemon-display-img">
+        <img [src]="pokemon.spriteURL" [alt]="pokemon.name">
     </div>
 
-    <p class="pokemon-type">{{ pokemon.types.join(', ') }}</p>
+    <div class="pokemon-details">
+        <p class="pokemon-id">#{{ pokemon.id }}</p>
+
+        <div class="pokemon-name-type">
+            <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
+            <p>{{ pokemon.types.join(', ') }}</p>
+        </div>
+    
+        <!-- Show types with color
+        <p class="pokemon-type">
+            <span *ngFor="let type of pokemon.types" [ngClass]="type.toLowerCase()">{{ type }}</span>
+        </p>
+        -->
+    </div>
 </div>

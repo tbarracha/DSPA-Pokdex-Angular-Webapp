@@ -3,15 +3,17 @@
         <img [src]="pokemon.spriteURL" [alt]="pokemon.name">
     </div>
     
-    <div class="pokemon-legend">
-        <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
-        <p class="pokemon-id">ID: {{ pokemon.id }}</p>
-    </div>
-
     <div class="pokemon-details">
-        <p class="pokemon-height">Height: {{ pokemon.height }} m</p>
-        <p class="pokemon-weight">Weight: {{ pokemon.weight }} kg</p>
+        <p class="pokemon-id">#{{ pokemon.id }}</p>
+        <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
+    
+        <div class="pokemon-dimensions">
+            <span class="pokemon-height"><i class="fas fa-ruler"></i> {{ pokemon.height }}'</span>
+            <span class="pokemon-wright"><i class="fa-solid fa-weight-scale"></i> {{ pokemon.weight }} kg</span>
+        </div>
+    
+        <p class="pokemon-type">
+            <span *ngFor="let type of pokemon.types" [ngClass]="type.toLowerCase()">{{ type }}</span>
+        </p>
     </div>
-
-    <p class="pokemon-type">{{ pokemon.types.join(', ') }}</p>
 </div>

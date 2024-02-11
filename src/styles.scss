@@ -1,12 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 // colors
 $red: #fb4d45;
 $redDark: #c63a33;
 $black: #262626;
 $gray: #496a7f;
+$grayHover: #eeefef;
 $grayLight: #d8dbdb;
+$grayMedium:rgb(132, 132, 132)b;
 $accent: #fbfbfb;
+
+// pokemon types color
+$type-normal: #9f9e8e;
+$type-fire: #fc4323;
+$type-water: #3398fe;
+$type-electric: #ffcc33;
+$type-grass: #76cc54;
+$type-ice: #66cdfe;
+$type-fighting: #ba5444;
+$type-poison: #ab5499;
+$type-ground: #dcba55;
+$type-flying: #8899ff;
+$type-psychic: #fe5499;
+$type-bug: #aabb22;
+$type-rock: #ae9f61;
+$type-ghost: #6666ba;
+$type-dragon: #7666ef;
+$type-dark: #25273d;
+$type-steel: #aaaabb;
+$type-fairy: #ef98ee;
 
 * {
     font-family: Helvetica, sans-serif;
@@ -24,6 +47,10 @@ body {
     color: azure;
 
     background-color: $red
+}
+
+.header-img {
+    height: 100%;
 }
 
 input {
@@ -60,30 +87,20 @@ input {
     justify-content: flex-start;
     align-items: stretch;
     box-sizing: border-box;
-    padding-left: 8px;
-  }
-
-.pokemon-list-element {
-    box-sizing: border-box;
-    width: 33.33%;
-    //margin-bottom: 20px;
-    //padding: 0px 10px;
-}
-
-.pokemon-list-element:hover {
-    //background-color: lightgray;
-    background-color: $grayLight;
+    //padding-left: 8px;
 }
 
 .pokemon-displayer {
     flex: 1;
+    overflow-y: auto;
+    background-color: $accent;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    background-color: $accent;
 }
 
 .pokemon-displayer.expanded {
@@ -91,37 +108,145 @@ input {
     width: auto;
 }
 
+.pokemon-list-element {
+    box-sizing: border-box;
+    width: 33.33%;
+}
 
-.pokemon-legend {
-    
+.pokemon-list-element:hover {
+    background-color: $grayHover;
 }
 
 .pokemon-name {
     text-transform: uppercase;
     font-weight: bold;
     color: $black;
-    margin-bottom: -4%;
 }
 
 .pokemon-id {
-
-}
-
-.pokemon-type {
-
+    color: $grayLight;
+    font-size: smaller;
+    font-weight: bold;
 }
 
 .pokemon-details {
-    display: flex;
+    margin: 16px 8px 0px 8px;
+}
+
+.pokemon-name-type {
+    
+}
+
+.pokemon-name-type p {
+    margin: 0;
+}
+
+.pokemon-dimensions {
+    display: inline-flex;
 }
 
 .pokemon-height,
 .pokemon-weight {
-    margin-right: 20px; /* Add spacing between height and weight */
+    width: 48px;
+    margin-right: 8px; /* Add spacing between height and weight */
 }
 
 .pokemon-display-img {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+// Type Bean
+@mixin pokemonTypeBean($backgroundColor, $textColor) {
+    height: 24px;
+    width: 48px;
+    background-color: $backgroundColor;
+    color: $textColor;
+    
+    border-radius: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 5px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.pokemon-type {
+    
+}
+
+.normal {
+    @include pokemonTypeBean($type-normal, $accent);
+}
+
+.fire {
+    @include pokemonTypeBean($type-fire, $accent);
+}
+
+.water {
+    @include pokemonTypeBean($type-water, $accent);
+}
+
+.electric {
+    @include pokemonTypeBean($type-electric, $black);
+}
+
+.grass {
+    @include pokemonTypeBean($type-grass, $accent);
+}
+
+.ice {
+    @include pokemonTypeBean($type-ice, $accent);
+}
+
+.fighting {
+    @include pokemonTypeBean($type-fighting, $accent);
+}
+
+.poison {
+    @include pokemonTypeBean($type-poison, $accent);
+}
+
+.ground {
+    @include pokemonTypeBean($type-ground, $black);
+}
+
+.flying {
+    @include pokemonTypeBean($type-flying, $accent);
+}
+
+.psychic {
+    @include pokemonTypeBean($type-psychic, $accent);
+}
+
+.bug {
+    @include pokemonTypeBean($type-bug, $accent);
+}
+
+.rock {
+    @include pokemonTypeBean($type-rock, $accent);
+}
+
+.ghost {
+    @include pokemonTypeBean($type-ghost, $accent);
+}
+
+.dragon {
+    @include pokemonTypeBean($type-dragon, $accent);
+}
+
+.dark {
+    @include pokemonTypeBean($type-dark, $accent);
+}
+
+.steel {
+    @include pokemonTypeBean($type-steel, $accent);
+}
+
+.fairy {
+    @include pokemonTypeBean($type-fairy, $accent);
 }

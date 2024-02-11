@@ -70,4 +70,16 @@ export class PokeDataService {
     this.cachedPokemon[data.id] = pokemon;
     return pokemon;
   }
+
+  getPokemonTypeColor(type: string): string {
+    switch (type.toLowerCase()) {
+      case 'fire':
+        return '#FF5733'; // Example color for Fire type
+      case 'water':
+        return '#3399FF'; // Example color for Water type
+      // Add cases for other types
+      default:
+        return '#000000'; // Default color
+    }
+  }
 }
