@@ -38,9 +38,13 @@ input {
     background-color: $redDark;
 }
 
-.searchbar-input {
+.search-input {
+    outline: 0;
+    border: none;
+    border-radius: 16px;
     width: 80%;
     height: 60%;
+    padding-left: 8px;
 }
 
 .content {
@@ -62,7 +66,7 @@ input {
 .pokemon-list-element {
     box-sizing: border-box;
     width: 33.33%;
-    margin-bottom: 20px;
+    //margin-bottom: 20px;
     //padding: 0px 10px;
 }
 
