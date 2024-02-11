@@ -16,7 +16,6 @@ export class SearchBarComponent {
 
   onSearch(inputField: HTMLInputElement, event: KeyboardEvent): void {
     if (event.key === 'Enter') {
-      console.log("Search query triggered!");
       this.eventManager.searchQuery.emit(inputField.value);
     }
   }

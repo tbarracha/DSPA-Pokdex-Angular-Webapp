@@ -9,6 +9,7 @@ export class EventManagerService {
   // event variables
   pokemonSelected: EventEmitter<Pokemon> = new EventEmitter<Pokemon>();
   searchQuery: EventEmitter<string> = new EventEmitter<string>();
+  searchQueryResult: EventEmitter<Pokemon[]> = new EventEmitter<Pokemon[]>(); 
 
   constructor() { }
 }

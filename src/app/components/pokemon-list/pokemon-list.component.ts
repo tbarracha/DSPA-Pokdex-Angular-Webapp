@@ -69,6 +69,58 @@ export class PokemonListComponent {
     // Search Query
     // ----------------------------------------------------------------------------------
     private searchQuery(query: string) {
-      console.log("Pokemon list recieved a query - " + query);
+      //console.log("Pokemon list recieved a query: " + query);
+
+      // If the query is empty, show the first 9 Pokémon
+      if (!query.trim()) {
+        this.getFirstPokemon();
+        console.log("query is EMPTY!");
+        return;
+      }
+
+      // If the query contains a range in the format "start-end"
+      const rangeRegex = /^(\d+)-(\d+)$/;
+      const rangeRegexSpace = /^(\d+) (\d+)$/;
+      const rangeMatch = query.match(rangeRegex) || query.match(rangeRegexSpace);
+      if (rangeMatch) {
+        const start = parseInt(rangeMatch[1]);
+        const end = parseInt(rangeMatch[2]);
+        if (!isNaN(start) && !isNaN(end) && start <= end) {
+          this.pokeDataService.getPokemonsInRange(start, end).subscribe((pokemons: Pokemon[]) => {
+            this.pokeList = pokemons;
+            console.log("Found Pokémon in range:", pokemons);
+          });
+          return;
+        } else {
+          console.log("Invalid range format");
+        }
+      }
+
+      // If the query is a number, fetch Pokémon by ID
+      if (!isNaN(Number(query))) {
+        let pokemonId = Number(query);
+        if (pokemonId < 0)
+          pokemonId = 1;
+
+        this.pokeDataService.getPokemonById(pokemonId).subscribe((pokemon: Pokemon) => {
+          if (pokemon) {
+            this.pokeList = [pokemon];
+            console.log("found pokemon by ID!");
+          } else {
+            console.log(`No Pokémon found with ID ${pokemonId}`);
+          }
+        });
+        return;
+      }
+
+      // If the query is a name, fetch Pokémon by name
+      this.pokeDataService.getPokemonByName(query.toLowerCase()).subscribe((pokemon: Pokemon) => {
+        if (pokemon) {
+          this.pokeList = [pokemon];
+          console.log("found pokemon by NAME!");
+        } else {
+          console.log(`No Pokémon found with name ${query}`);
+        }
+      });
     }
 }

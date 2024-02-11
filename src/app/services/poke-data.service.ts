@@ -27,10 +27,10 @@ export class PokeDataService {
   }
 
   getPokemonById(id: number): Observable<Pokemon> {
-
     if (this.cachedPokemon[id]) {
       return of(this.cachedPokemon[id]);
     }
+
     else {
       const url = `${this.pokeApiLink}/${id}`;
 
@@ -43,6 +43,19 @@ export class PokeDataService {
       );
     }
   }
+
+  getPokemonByName(name: string): Observable<Pokemon> {
+    const url = `${this.pokeApiLink}/${name}`;
+  
+    return this.http.get<any>(url).pipe(
+      map(data => this.mapResponseToPokemon(data)),
+      catchError(error => {
+        console.error(`Error fetching Pokémon with name ${name}:`, error);
+        throw `Error fetching Pokémon with name ${name}. Please try again later.`;
+      })
+    );
+  }
+  
 
   // method used to cache fetched pokemon data
   private mapResponseToPokemon(data: any): Pokemon {

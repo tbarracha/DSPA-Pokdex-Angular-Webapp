@@ -26,12 +26,21 @@ body {
     background-color: $red
 }
 
+input {
+    outline: 0;
+}
+
 .searchbar {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 48px;
     background-color: $redDark;
+}
+
+.searchbar-input {
+    width: 80%;
+    height: 60%;
 }
 
 .content {
@@ -47,13 +56,19 @@ body {
     justify-content: flex-start;
     align-items: stretch;
     box-sizing: border-box;
+    padding-left: 8px;
   }
 
 .pokemon-list-element {
     box-sizing: border-box;
     width: 33.33%;
     margin-bottom: 20px;
-    padding: 0px 10px;
+    //padding: 0px 10px;
+}
+
+.pokemon-list-element:hover {
+    //background-color: lightgray;
+    background-color: $grayLight;
 }
 
 .pokemon-displayer {

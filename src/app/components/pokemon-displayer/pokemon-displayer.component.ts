@@ -24,6 +24,5 @@ export class PokemonDisplayerComponent {
     }
 
     this.pokemon = pokemon;
-    console.log('Displayer Received Pokemon:', this.pokemon);
   }
 }
