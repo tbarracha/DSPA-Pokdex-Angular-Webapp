@@ -111,11 +111,20 @@ input {
 
 .pokemon-displayer-content {
     width: 80%;
+    //display: flex;
 }
 
 .pokemon-displayer.expanded {
     height: auto;
     width: auto;
+}
+
+.pokemon-displayer-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:start;
+    margin-left: 35%;
 }
 
 .pokemon-list-element {
