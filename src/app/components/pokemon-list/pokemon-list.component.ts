@@ -6,6 +6,7 @@ import { Pokemon } from 'src/app/classes/pokemon';
 // services
 import { PokeDataService } from 'src/app/services/poke-data.service';
 import { EventManagerService } from 'src/app/services/event-manager.service';
+import { ShinyPokemonGuard } from 'src/app/guards/shiny-pokemon.guard';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -20,7 +21,7 @@ export class PokemonListComponent {
 
   constructor(
     private pokeDataService: PokeDataService,
-    private eventManager: EventManagerService
+    private eventManager: EventManagerService,
     ) {
     eventManager.searchQuery.subscribe(this.searchQuery.bind(this))
   }

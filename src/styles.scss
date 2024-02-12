@@ -10,6 +10,7 @@ $grayHover: #eeefef;
 $grayLight: #d8dbdb;
 $grayMedium:rgb(132, 132, 132)b;
 $accent: #fbfbfb;
+$blackDropShadow: #5d5d5d3c;
 
 // pokemon types color
 $type-normal: #9f9e8e;
@@ -109,6 +110,10 @@ input {
     align-items: center;
 }
 
+.pokemon-displayer img {
+    filter: drop-shadow(0px 14px 8px $blackDropShadow);
+}
+
 .pokemon-displayer-content {
     width: 80%;
     //display: flex;
@@ -130,10 +135,15 @@ input {
 .pokemon-list-element {
     box-sizing: border-box;
     width: 33.33%;
+    height: 33.33vh;
 }
 
 .pokemon-list-element:hover {
     background-color: $grayHover;
+}
+
+.pokemon-list-element:hover img {
+    filter: drop-shadow(0px 12px 8px $blackDropShadow);
 }
 
 .pokemon-name {

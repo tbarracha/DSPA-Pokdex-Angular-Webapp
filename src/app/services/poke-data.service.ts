@@ -16,6 +16,12 @@ export class PokeDataService {
     private http: HttpClient
   ) { }
 
+  static isShinyPokemon(id: number): boolean {
+    // Your logic to determine if a Pokemon is shiny
+    
+    return true;
+  }
+
   getPokemonsInRange(start: number, end: number): Observable<Pokemon[]> {
     const observables: Observable<Pokemon>[] = [];
   
@@ -63,6 +69,7 @@ export class PokeDataService {
       id: data.id,
       name: data.name,
       spriteURL: data.sprites.front_default,
+      spriteShinyURL: data.sprites.front_shiny,
       types: data.types.map((type: any) => type.type.name),
       height: data.height,
       weight: data.weight,
