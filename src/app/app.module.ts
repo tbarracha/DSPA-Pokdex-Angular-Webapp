@@ -24,6 +24,7 @@ import { HttpSecureInterceptor } from './interceptors/http-secure.interceptor';
 // guards
 import { ShinyPokemonGuard } from './guards/shiny-pokemon.guard';
 import { ToggleShinyComponent } from './components/toggle-shiny/toggle-shiny.component';
+import { PokemonImageComponent } from './components/pokemon-image/pokemon-image.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ToggleShinyComponent } from './components/toggle-shiny/toggle-shiny.com
     PokemonListElementComponent,
     PokemonTypeDirective,
     PokemonCryComponent,
-    ToggleShinyComponent
+    ToggleShinyComponent,
+    PokemonImageComponent
   ],
   imports: [
     BrowserModule,

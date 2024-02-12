@@ -1,0 +1,5 @@
+<div *ngIf="pokemon">
+    <div class="pokemon-display-img">
+        <img [src]="isShinyPokemon() ? pokemon.spriteShinyURL : pokemon.spriteURL" [alt]="pokemon.name">
+    </div>
+</div>

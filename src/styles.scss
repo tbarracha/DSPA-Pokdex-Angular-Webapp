@@ -68,6 +68,8 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: sticky;
+    top: 0;
     height: 48px;
     background-color: $redDark;
 }

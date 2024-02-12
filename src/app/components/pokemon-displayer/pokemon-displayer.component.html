@@ -1,7 +1,5 @@
 <div class="pokemon-displayer-content" *ngIf="pokemon">
-    <div class="pokemon-display-img">
-        <img [src]="pokemon.spriteURL" [alt]="pokemon.name" (click)="playPokemonCry()">
-    </div>
+    <app-pokemon-image [pokemon]="pokemon"></app-pokemon-image>
     
     <div class="pokemon-displayer-details">
         <p class="pokemon-id">#{{ pokemon.id }}</p>
@@ -16,4 +14,6 @@
             <span *ngFor="let type of pokemon.types" [ngClass]="type.toLowerCase()">{{ type }}</span>
         </p>
     </div>
+
+    <app-toggle-shiny class="center"></app-toggle-shiny>
 </div>
