@@ -4,6 +4,7 @@ Developed for DSPA (Development of Single Page Applications) while enrolled in U
 
 ![angular_pokedex](https://github.com/tbarracha/DSPA-Pokdex-Angular-Webapp/assets/21272904/5386dda0-559b-448a-a296-fd1185980dbf)
 
+## NOT BUILT WITH MOBILE IN MIND!
 
 ### Requirements
 - Angular Pipes
