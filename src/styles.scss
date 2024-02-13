@@ -76,6 +76,7 @@ input {
     top: 0;
     height: 48px;
     background-color: $redDark;
+    z-index: 999;
 }
 
 .search-input {
@@ -287,4 +288,21 @@ input {
     background-color: $grayLight;
     color: $accent;
     border-radius: 16px;
+}
+
+.credit-text {
+    color: $grayLight;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    margin-right: 8px;
+}
+
+.credits {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 16px;
+    margin-right: 16px;
 }

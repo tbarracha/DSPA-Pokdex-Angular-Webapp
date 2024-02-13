@@ -1,5 +1,6 @@
 // pokemon-displayer.component.ts
 import { Component } from '@angular/core';
+import { PageName } from 'src/app/classes/PageName';
 import { Pokemon } from 'src/app/classes/pokemon';
 
 // services
@@ -24,5 +25,9 @@ export class PokemonDisplayerComponent {
     }
 
     this.pokemon = pokemon;
+  }
+
+  toCreditsPage() {
+    this.eventManager.toPage.emit(PageName.Credits);
   }
 }

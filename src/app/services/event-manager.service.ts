@@ -28,15 +28,21 @@ export class EventManagerService {
   }
 
   routeToPage(targetPage: PageName) {
-    console.log("Page Changed: " + targetPage);
-
     if (this.currentPage == targetPage) {
       return;
     }
+    
+    console.log("Page Changed: " + targetPage);
+
+    let url = `/${targetPage.toString().toLowerCase()}`;
+    this.router.navigate([url]);
+
+    console.log(url);
 
     switch(targetPage) {
+
       case PageName.Home:
-        this.router.navigate(['/content']);
+        this.router.navigate(['/home']);
         break;
 
       case PageName.Credits:

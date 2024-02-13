@@ -17,7 +17,7 @@ import { ScrollEvent, ScrollService } from 'src/app/services/scroll.service';
 export class PokemonListComponent {
 
   pokeList: Pokemon[] = [];
-  selectedPokemon: Pokemon | null = null;
+  selectedPokemon: Pokemon | null;
   elementRef: any;
   canLoadMore: boolean = true;
 
@@ -26,6 +26,8 @@ export class PokemonListComponent {
     private eventManager: EventManagerService,
     private scrollService: ScrollService,
     ) {
+    
+      this.selectedPokemon = null;
     eventManager.searchQuery.subscribe(this.searchQuery.bind(this));
     eventManager.toPage.subscribe(this.toPage.bind(this));
   }
@@ -47,6 +49,12 @@ export class PokemonListComponent {
       this.pokeDataService.getPokemonsInRange(1, 9).subscribe(
         (pokemons: Pokemon[]) => {
         this.pokeList = pokemons;
+        if (this.selectedPokemon == null)
+        {
+          console.log("Pokemon is null!");
+          const rand: number = this.getRandomInt(1, 9);
+          this.confirmPokemonSelection(this.pokeList[rand]);
+        }
       });
     }
 
@@ -169,5 +177,11 @@ export class PokemonListComponent {
           console.log(`No Pokémon found with name ${query}`);
         }
       });
+    }
+
+    private getRandomInt(min: number, max: number): number {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min)) + min;
     }
 }
