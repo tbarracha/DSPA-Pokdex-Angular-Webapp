@@ -1,4 +1,4 @@
-# DSPA-Pokdex-Angular-Webapp
+# DSPA-Pokedex-Angular-Webapp
 Pokedex Webapp made with Angular </br>
 Developed for DSPA (Development of Single Page Applications) while enrolled in Upskill
 
