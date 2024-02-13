@@ -40,6 +40,14 @@ body {
     margin: 0;
 }
 
+a {
+    color: $red;
+}
+
+a:hover {
+    color: $redDark;
+}
+
 .center {
     display: flex;
     justify-content: center;
@@ -118,6 +126,10 @@ input {
     align-items: center;
 }
 
+.pokemon-displayer-color {
+
+}
+
 .pokemon-displayer img {
     filter: drop-shadow(0px 14px 8px $blackDropShadow);
     $size: 128px;
@@ -127,7 +139,6 @@ input {
 
 .pokemon-displayer-content {
     width: 80%;
-    //display: flex;
 }
 
 .pokemon-displayer-details {
@@ -312,7 +323,7 @@ input {
 }
 
 .credits-text:hover {
-    color: $gray;
+    color: $redDark;
     font-weight: bold;
 }
 
@@ -368,8 +379,29 @@ input {
     border-radius: 16px;
     width: 32px;
     cursor: pointer;
-  }
+}
   
-  .scroll-top-btn:hover {
+.scroll-top-btn:hover {
     background-color: $red;
-  }
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 8px;
+    height: 90px;
+}
+
+// Track
+::-webkit-scrollbar-track {
+    background: $black;
+}
+
+// Handle
+::-webkit-scrollbar-thumb {
+    background: $redDark;
+}
+
+// Handle on hover
+::-webkit-scrollbar-thumb:hover {
+    background: $red;
+}

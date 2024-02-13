@@ -1,5 +1,16 @@
 <div *ngIf="pokemon">
+    <!-- 
     <div class="pokemon-display-img pointable">
-        <img [src]="isShinyPokemon() ? pokemon.spriteShinyURL : pokemon.spriteURL" [alt]="pokemon.name" (click)="playPokemonCry()">
+        <img [src]="isShinyPokemon() ? pokemon.spriteSerebiShinyURL : pokemon.spriteSerebiURL" [alt]="pokemon.name" (click)="playPokemonCry()">
+    </div>
+     -->
+    
+    <div class="pokemon-display-img pointable">
+        <img 
+            [src]="isShinyPokemon() ? shinySpriteURL : normalSpriteURL" 
+            [alt]="pokemon.name" 
+            (error)="onImageError()"
+            (click)="playPokemonCry()"
+        >
     </div>
 </div>

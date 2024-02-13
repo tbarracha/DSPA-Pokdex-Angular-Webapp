@@ -1,10 +1,5 @@
 <div *ngIf="pokemon" (click)="displayPokemonDetails()">
-    <div class="pokemon-display-img">
-        <!--  
-            <img [src]="isShinyPokemon() ? pokemon.spriteShinyURL : pokemon.spriteURL" [alt]="pokemon.name">
-        -->
-        <img [src]="pokemon.spriteURL" [alt]="pokemon.name">
-    </div>
+    <app-pokemon-image [pokemon]="pokemon" [isDisplayImg]="false"></app-pokemon-image>
 
     <div class="pokemon-details">
         <p class="pokemon-id">#{{ pokemon.id }}</p>
@@ -13,11 +8,5 @@
             <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
             <p>{{ pokemon.types.join(', ') }}</p>
         </div>
-    
-        <!-- Show types with color
-        <p class="pokemon-type">
-            <span *ngFor="let type of pokemon.types" [ngClass]="type.toLowerCase()">{{ type }}</span>
-        </p>
-        -->
     </div>
 </div>

@@ -1,0 +1,10 @@
+.displayer-toggles {
+    display: flex;
+    flex-direction: row;
+}
+
+.displayer-toggles app-toggle-shiny,
+.displayer-toggles app-toggle-legacy {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}

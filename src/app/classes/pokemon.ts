@@ -3,6 +3,8 @@ export interface Pokemon {
     name: string;
     spriteURL: string;
     spriteShinyURL: string;
+    spriteSerebiURL: string;
+    spriteSerebiShinyURL: string;
     types: string[];
     height: string;
     weight: string;

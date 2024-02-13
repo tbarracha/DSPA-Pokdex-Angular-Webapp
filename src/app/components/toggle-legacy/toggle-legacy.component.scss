@@ -1,28 +1,17 @@
 @import "../../../styles.scss";
 
-.toggle-shiny {
+.toggle-legacy {
     width: 64px;
     height: 24px;
 }
 
-.toggle-shiny button {
+.toggle-legacy button {
     width: 100%;
     height: 100%;
     border: 0;
     outline: 0;
     border-radius: 8px;
-}
 
-.toggle-shiny.on button {
-    color: #ffaa00;
-    background-color: #ffd00056;
-
-    &:hover {
-        background-color: #ffd0007c;
-    }
-}
-
-.toggle-shiny.off button {
     color: $gray;
     background-color: #002a571e;
 

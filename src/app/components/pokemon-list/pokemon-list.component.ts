@@ -18,7 +18,7 @@ import { QueryType } from 'src/app/enums/queryType';
 
 export class PokemonListComponent {
 
-  loadCount: number = 15;
+  loadCount: number = 18;
   maxPokeCount: number = 1025;
 
   pokeList: Pokemon[] = [];
@@ -103,7 +103,7 @@ export class PokemonListComponent {
       switch (this.queryType) {
           case QueryType.Id:
           case QueryType.Name:
-          case QueryType.Range:
+          //case QueryType.Range:
               startIndex = this.pokeList[this.pokeList.length - 1].id + 1;
               endIndex = startIndex + this.loadCount;
               break;
@@ -205,6 +205,8 @@ export class PokemonListComponent {
         let pokemonId = Number(query);
         if (pokemonId < 0)
           pokemonId = 1;
+        if (pokemonId >= 1025)
+          pokemonId = 1025;
 
         this.pokeDataService.getPokemonById(pokemonId).subscribe((pokemon: Pokemon) => {
           if (pokemon) {

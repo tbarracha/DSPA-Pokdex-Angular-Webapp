@@ -1,6 +1,6 @@
 <div class="pokemon-displayer-content" *ngIf="pokemon">
     <section class="pokemon-displayer-color"></section>
-    <app-pokemon-image [pokemon]="pokemon"></app-pokemon-image>
+    <app-pokemon-image [pokemon]="pokemon" [isDisplayImg]="true"></app-pokemon-image>
     
     <div class="pokemon-displayer-details">
         <section class="pokemon-displayer-name-id">
@@ -18,7 +18,10 @@
         </p>
     </div>
 
-    <app-toggle-shiny class="center"></app-toggle-shiny>
+    <div class="displayer-toggles center">
+        <app-toggle-shiny class="center"></app-toggle-shiny>
+        <app-toggle-legacy class="center"></app-toggle-legacy>
+    </div>
 </div>
 
 <p class="credits-text pointable" (click)="toCreditsPage()">Credits</p>

@@ -96,11 +96,15 @@ export class PokeDataService {
 
   // method used to cache fetched pokemon data
   private mapResponseToPokemon(data: any): Pokemon {
+    let serubiId : string = this.getSerubiId(data.id);
+
     const pokemon: Pokemon = {
       id: data.id,
       name: data.name,
       spriteURL: data.sprites.front_default,
       spriteShinyURL: data.sprites.front_shiny,
+      spriteSerebiURL: "https://www.serebii.net/pokemongo/pokemon/" + serubiId + ".png",
+      spriteSerebiShinyURL: "https://www.serebii.net/pokemongo/pokemon/shiny/" + serubiId + ".png",
       types: data.types.map((type: any) => type.type.name),
       height: data.height,
       weight: data.weight,
@@ -111,5 +115,19 @@ export class PokeDataService {
     //console.log(data.cries);
     this.cachedPokemon[data.id] = pokemon;
     return pokemon;
+  }
+
+  private getSerubiId(currentId: any) : string {
+    const id: number = Number.parseInt(currentId);
+    console.log("Current ID: " + currentId);
+
+    if (id < 10) {
+      return "00"+ id;
+    }
+    if (id < 100) {
+      return "0"+ id;
+    }
+
+    return currentId.toString();
   }
 }

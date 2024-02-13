@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Pokemon } from 'src/app/classes/pokemon';
 import { PageName } from '../enums/PageName';
 import { Router } from '@angular/router';
+import { PokemonImageDisplayStyle } from '../enums/ImageDisplayType';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class EventManagerService {
   // pokemon
   pokemonClicked: EventEmitter<Pokemon> = new EventEmitter<Pokemon>();
   pokemonSelected: EventEmitter<Pokemon> = new EventEmitter<Pokemon>();
+  onImageDisplayStyleChange: EventEmitter<PokemonImageDisplayStyle> = new EventEmitter<PokemonImageDisplayStyle>(); 
 
   // search
   searchQuery: EventEmitter<string> = new EventEmitter<string>();
