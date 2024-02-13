@@ -20,8 +20,4 @@ export class HeaderComponent {
   toMainPage() {
     this.router.navigate(['/home']);
   }
-
-  toCreditsPage() {
-    this.eventManager.toPage.emit(PageName.Credits);
-  }
 }
