@@ -1,17 +1,20 @@
 <div class="pokemon-displayer-content" *ngIf="pokemon">
+    <section class="pokemon-displayer-color"></section>
     <app-pokemon-image [pokemon]="pokemon"></app-pokemon-image>
     
     <div class="pokemon-displayer-details">
-        <p class="pokemon-id">#{{ pokemon.id }}</p>
-        <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
+        <section class="pokemon-displayer-name-id">
+            <p class="pokemon-id poke-displayer-id">#{{ pokemon.id }}</p>
+            <p class="pokemon-name">{{ pokemon.name | titlecase }}</p>
+        </section>
     
         <div class="pokemon-dimensions">
             <span class="pokemon-height"><i class="fas fa-ruler"></i> {{ pokemon.height }}'</span>
             <span class="pokemon-wright"><i class="fa-solid fa-weight-scale"></i> {{ pokemon.weight }} kg</span>
         </div>
     
-        <p class="pokemon-type">
-            <span *ngFor="let type of pokemon.types" [ngClass]="type.toLowerCase()">{{ type }}</span>
+        <p class="pokemon-type pointable">
+            <span *ngFor="let type of pokemon.types" (click)="searchType(type)" [ngClass]="type.toLowerCase()">{{ type }}</span>
         </p>
     </div>
 

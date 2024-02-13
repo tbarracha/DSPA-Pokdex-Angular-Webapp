@@ -8,4 +8,3 @@ export interface Pokemon {
     weight: string;
     cry: string;
 }
-

@@ -6,15 +6,27 @@ import { ShinyPokemonGuard } from 'src/app/guards/shiny-pokemon.guard';
   templateUrl: './toggle-shiny.component.html',
   styleUrls: ['./toggle-shiny.component.scss']
 })
+
 export class ToggleShinyComponent {
-  
+  selected: boolean = false;
+
   constructor(
     private shinyGuard: ShinyPokemonGuard,
   ) {
-
+    this.refreshSelection();
   }
 
-  toggleShinyMode(event: any) {
+  ngOnInit() {
+    this.refreshSelection();
+  }
+
+  toggleShiny()
+  {
     this.shinyGuard.toggleShinyMode();
+    this.refreshSelection();
+  }
+
+  private refreshSelection() {
+    this.selected = this.shinyGuard.isShinyModeActivated;
   }
 }

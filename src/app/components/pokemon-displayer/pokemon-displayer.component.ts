@@ -1,6 +1,6 @@
 // pokemon-displayer.component.ts
 import { Component } from '@angular/core';
-import { PageName } from 'src/app/classes/PageName';
+import { PageName } from 'src/app/enums/PageName';
 import { Pokemon } from 'src/app/classes/pokemon';
 
 // services
@@ -29,5 +29,10 @@ export class PokemonDisplayerComponent {
 
   toCreditsPage() {
     this.eventManager.toPage.emit(PageName.Credits);
+  }
+
+  searchType(tag: string) {
+    console.log("Searching for tag: " + tag);
+    this.eventManager.searchQuery.emit(tag);
   }
 }

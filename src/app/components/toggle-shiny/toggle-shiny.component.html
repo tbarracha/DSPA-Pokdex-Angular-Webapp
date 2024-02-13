@@ -1,1 +1,8 @@
+<!--  
 Shiny <input type="checkbox" (change)="toggleShinyMode($event)">
+-->
+<div [ngClass]="{'toggle-shiny': true, 'on': selected, 'off': !selected}">
+    <button class="pointable center" (click)="toggleShiny()">
+        Shiny
+    </button>
+</div>

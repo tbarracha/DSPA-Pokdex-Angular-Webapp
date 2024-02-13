@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PageName } from 'src/app/classes/PageName';
+import { PageName } from 'src/app/enums/PageName';
 import { EventManagerService } from 'src/app/services/event-manager.service';
 
 @Component({

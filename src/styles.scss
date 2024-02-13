@@ -120,6 +120,9 @@ input {
 
 .pokemon-displayer img {
     filter: drop-shadow(0px 14px 8px $blackDropShadow);
+    $size: 128px;
+    width: $size;
+    height: $size;
 }
 
 .pokemon-displayer-content {
@@ -127,17 +130,24 @@ input {
     //display: flex;
 }
 
-.pokemon-displayer.expanded {
-    height: auto;
-    width: auto;
-}
-
 .pokemon-displayer-details {
     display: flex;
+
     flex-direction: column;
     justify-content: center;
-    align-items:start;
-    margin-left: 35%;
+    align-items:center;
+}
+
+.pokemon-displayer-name-id {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    //align-items:center;
+    align-items: baseline;
+}
+
+.poke-displayer-id {
+    margin-bottom: -4px;
 }
 
 .pokemon-list-element {
@@ -193,13 +203,13 @@ input {
 // Type Bean
 @mixin pokemonTypeBean($backgroundColor, $textColor) {
     height: 24px;
-    width: 48px;
+    width: 56px;
     background-color: $backgroundColor;
     color: $textColor;
     
     border-radius: 16px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 6px;
+    padding-right: 6px;
     margin-right: 5px;
 
     display: inline-flex;
@@ -292,12 +302,18 @@ input {
 
 .credits-text {
     color: $grayLight;
+    font-weight: normal;
     position: absolute;
     bottom: 0;
-    right: 0;
+    left: 0;
     margin-bottom: 8px;
+    margin-left: 8px;
     margin-right: 8px;
-    margin-right: 8px;
+}
+
+.credits-text:hover {
+    color: $gray;
+    font-weight: bold;
 }
 
 .credits {
@@ -305,6 +321,19 @@ input {
     margin-bottom: 8px;
     margin-left: 16px;
     margin-right: 16px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.credits-line {
+    position: absolute;
+    top: 64px;
+    width: 100%;
+    height: 8px;
+    background-color: $redDark;
 }
 
 .credits-main {
@@ -312,14 +341,35 @@ input {
     margin-bottom: 32px;
 }
 
-.credits-secondary {
-    display: inline-flex;
-    color: #868585;
-    margin-bottom: 32px;
-    width: 100%;
+.credits-column-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
 }
 
-.credits-secondary-column {
-    flex: auto;
+.column {
+    flex: 1;
     width: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.scroll-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: $redDark;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    width: 32px;
+    cursor: pointer;
+  }
+  
+  .scroll-top-btn:hover {
+    background-color: $red;
+  }

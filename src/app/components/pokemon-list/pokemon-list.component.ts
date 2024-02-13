@@ -7,6 +7,8 @@ import { Pokemon } from 'src/app/classes/pokemon';
 import { PokeDataService } from 'src/app/services/poke-data.service';
 import { EventManagerService } from 'src/app/services/event-manager.service';
 import { ScrollEvent, ScrollService } from 'src/app/services/scroll.service';
+import { PokemonType } from 'src/app/enums/PokemonType';
+import { QueryType } from 'src/app/enums/queryType';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -16,18 +18,22 @@ import { ScrollEvent, ScrollService } from 'src/app/services/scroll.service';
 
 export class PokemonListComponent {
 
+  loadCount: number = 15;
+  maxPokeCount: number = 1025;
+
   pokeList: Pokemon[] = [];
   selectedPokemon: Pokemon | null;
   elementRef: any;
   canLoadMore: boolean = true;
+  queryType: QueryType;
 
   constructor(
     private pokeDataService: PokeDataService,
     private eventManager: EventManagerService,
     private scrollService: ScrollService,
     ) {
-    
-      this.selectedPokemon = null;
+    this.queryType = QueryType.None;
+    this.selectedPokemon = null;
     eventManager.searchQuery.subscribe(this.searchQuery.bind(this));
     eventManager.toPage.subscribe(this.toPage.bind(this));
   }
@@ -81,15 +87,48 @@ export class PokemonListComponent {
       }
     }
 
-
     loadMorePokemon() {
-      const startIndex = this.pokeList.length + 1;
-      const endIndex = startIndex + 15;
-    
+      //const startIndex = this.pokeList.length + 1;
+      //const endIndex = startIndex + this.loadCount;
+
+      if (this.pokeList.length > 1024) {
+        return;
+      }
+
+      console.log("Query type: " + QueryType[this.queryType]);
+
+      let startIndex!: number;
+      let endIndex!: number;
+  
+      switch (this.queryType) {
+          case QueryType.Id:
+          case QueryType.Name:
+          case QueryType.Range:
+              startIndex = this.pokeList[this.pokeList.length - 1].id + 1;
+              endIndex = startIndex + this.loadCount;
+              break;
+
+          case QueryType.None:
+              startIndex = this.pokeList.length + 1;
+              endIndex = startIndex + this.loadCount;
+              break;
+
+          default:
+            break;
+      }
+  
       this.loadPokemonInRange(startIndex, endIndex);
     }
 
     private loadPokemonInRange(start: number, end: number) {
+      if (start < 1) {
+        start = 1;
+      }
+
+      if (end > this.maxPokeCount) {
+        end = this.maxPokeCount;
+      }
+
       this.pokeDataService.getPokemonsInRange(start, end).subscribe(
         (pokemons: Pokemon[]) => {
           this.pokeList.push(...pokemons);
@@ -124,24 +163,36 @@ export class PokemonListComponent {
     private searchQuery(query: string) {
       //console.log("Pokemon list recieved a query: " + query);
 
-      // If the query is empty, show the first 9 Pokémon
+      // is it empty? Then show the first 9 Pokémon
       if (!query.trim()) {
         this.getFirstPokemon();
         console.log("query is EMPTY!");
+        this.queryType = QueryType.None;
         return;
       }
 
-      
-      const rangeRegex = /^(\d+)-(\d+)$/;       // query for ex: 1-151
-      const rangeRegexSpace = /^(\d+) (\d+)$/;  // query for ex: 1 151
+      // is it a range?
+      const rangeRegex = /^(\d+)-(\d+)$/;       // query for range with '-': 1-151
+      const rangeRegexSpace = /^(\d+) (\d+)$/;  // query for range with 'whitespace': 1 151
       const rangeMatch = query.match(rangeRegex) || query.match(rangeRegexSpace);
       if (rangeMatch) {
-        const start = parseInt(rangeMatch[1]);
-        const end = parseInt(rangeMatch[2]);
+        let start = parseInt(rangeMatch[1]);
+        let end = parseInt(rangeMatch[2]);
+
+        if (start < 1) {
+          start = 1;
+        }
+  
+        if (end > this.maxPokeCount) {
+          end = this.maxPokeCount;
+        }
+
         if (!isNaN(start) && !isNaN(end) && start <= end) {
           this.pokeDataService.getPokemonsInRange(start, end).subscribe((pokemons: Pokemon[]) => {
             this.pokeList = pokemons;
+            this.queryType = QueryType.Range;
             console.log("Found Pokémon in range:", pokemons);
+            this.scrollToTop();
           });
           return;
         } else {
@@ -149,7 +200,7 @@ export class PokemonListComponent {
         }
       }
 
-      // If the query is a number, fetch Pokémon by ID
+      // is it a number? (pokemon ID)
       if (!isNaN(Number(query))) {
         let pokemonId = Number(query);
         if (pokemonId < 0)
@@ -158,7 +209,9 @@ export class PokemonListComponent {
         this.pokeDataService.getPokemonById(pokemonId).subscribe((pokemon: Pokemon) => {
           if (pokemon) {
             this.pokeList = [pokemon];
+            this.queryType = QueryType.Id;
             console.log("found pokemon by ID!");
+            this.scrollToTop();
           } else {
             console.log(`No Pokémon found with ID ${pokemonId}`);
           }
@@ -166,10 +219,31 @@ export class PokemonListComponent {
         return;
       }
 
-      // If the query is a name, fetch Pokémon by name
+      // is it a type?
+      const typeQuery = query.toLowerCase();
+      const typeValues = Object.values(PokemonType) as string[];
+      for (let i = 0; i < typeValues.length; i++) {
+          const type = typeValues[i];
+          if (typeQuery === type) {
+              this.pokeDataService.getPokemonByType(type).subscribe((pokemons: Pokemon[]) => {
+                  if (pokemons && pokemons.length > 0) {
+                      this.pokeList = pokemons;
+                      this.queryType = QueryType.Type;
+                      console.log("Found Pokémon by type:", pokemons);
+                      this.scrollToTop();
+                  } else {
+                      console.log(`No Pokémon found with type: ${typeQuery}`);
+                  }
+              });
+              return;
+          }
+      }
+
+      // is it a name?
       this.pokeDataService.getPokemonByName(query.toLowerCase()).subscribe((pokemon: Pokemon) => {
         if (pokemon) {
           this.pokeList = [pokemon];
+          this.queryType = QueryType.Name;
           console.log("found pokemon by NAME!");
         } else {
           console.log(`No Pokémon found with name ${query}`);
@@ -182,4 +256,8 @@ export class PokemonListComponent {
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    private scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }  
 }

@@ -26,6 +26,7 @@ import { ShinyPokemonGuard } from './guards/shiny-pokemon.guard';
 import { ToggleShinyComponent } from './components/toggle-shiny/toggle-shiny.component';
 import { PokemonImageComponent } from './components/pokemon-image/pokemon-image.component';
 import { CreditsComponent } from './components/credits/credits.component';
+import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { CreditsComponent } from './components/credits/credits.component';
     PokemonCryComponent,
     ToggleShinyComponent,
     PokemonImageComponent,
-    CreditsComponent
+    CreditsComponent,
+    ScrollTopComponent
   ],
   imports: [
     BrowserModule,

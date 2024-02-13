@@ -18,6 +18,7 @@ export class SearchBarComponent {
     if (event.key === 'Enter') {
       this.eventManager.searchQuery.emit(inputField.value);
     }
-    console.log(inputField.value);
+
+    //console.log(inputField.value);
   }
 }

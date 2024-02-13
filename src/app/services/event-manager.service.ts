@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Pokemon } from 'src/app/classes/pokemon';
-import { PageName } from '../classes/PageName';
+import { PageName } from '../enums/PageName';
 import { Router } from '@angular/router';
 
 @Injectable({
