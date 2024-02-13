@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Pokemon } from 'src/app/classes/pokemon';
 import { ShinyPokemonGuard } from 'src/app/guards/shiny-pokemon.guard';
+import { EventManagerService } from 'src/app/services/event-manager.service';
 
 @Component({
   selector: 'app-pokemon-list-element',
@@ -10,15 +11,17 @@ import { ShinyPokemonGuard } from 'src/app/guards/shiny-pokemon.guard';
 export class PokemonListElementComponent {
 
   @Input() pokemon?: Pokemon;
-  @Output() pokemonClicked: EventEmitter<Pokemon> = new EventEmitter<Pokemon>();
 
-  constructor() {}
+  constructor(
+    private eventManager: EventManagerService,
+    private shinyGuard: ShinyPokemonGuard,
+  ) {}
 
   displayPokemonDetails() {
-    this.pokemonClicked.emit(this.pokemon);
+    this.eventManager.pokemonClicked.emit(this.pokemon);
   }
 
   isShinyPokemon(): boolean {
-    return ShinyPokemonGuard.isShinyModeActivated;
+    return this.shinyGuard.isShinyModeActivated;
   }
 }

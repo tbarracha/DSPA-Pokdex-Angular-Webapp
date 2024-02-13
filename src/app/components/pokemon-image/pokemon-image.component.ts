@@ -11,14 +11,21 @@ import { Pokemon } from '../../classes/pokemon';
 export class PokemonImageComponent {
   @Input() pokemon?: Pokemon;
 
-  constructor() { }
-
-  private selectPokemon(selectedPokemon: Pokemon) {
-    this.pokemon = selectedPokemon;
-    console.log(selectedPokemon);
-  }
+  constructor(
+    private shinyGuard: ShinyPokemonGuard,
+  ) { }
 
   isShinyPokemon(): boolean {
-    return ShinyPokemonGuard.isShinyModeActivated;
+    return this.shinyGuard.isShinyModeActivated;
+  }
+
+  playPokemonCry() {
+    if (this.pokemon == null) {
+      console.log("pokemon is null!");
+      return;
+    }
+
+    const audio = new Audio(this.pokemon?.cry);
+    audio.play();
   }
 }

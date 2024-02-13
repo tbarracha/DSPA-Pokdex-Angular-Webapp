@@ -8,7 +8,13 @@ import { ShinyPokemonGuard } from 'src/app/guards/shiny-pokemon.guard';
 })
 export class ToggleShinyComponent {
   
+  constructor(
+    private shinyGuard: ShinyPokemonGuard,
+  ) {
+
+  }
+
   toggleShinyMode(event: any) {
-    ShinyPokemonGuard.toggleShinyMode();
+    this.shinyGuard.toggleShinyMode();
   }
 }

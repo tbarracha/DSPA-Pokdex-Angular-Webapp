@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 
 // pokemon
 import { Pokemon } from 'src/app/classes/pokemon';
@@ -6,6 +6,7 @@ import { Pokemon } from 'src/app/classes/pokemon';
 // services
 import { PokeDataService } from 'src/app/services/poke-data.service';
 import { EventManagerService } from 'src/app/services/event-manager.service';
+import { ScrollEvent, ScrollService } from 'src/app/services/scroll.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -17,18 +18,28 @@ export class PokemonListComponent {
 
   pokeList: Pokemon[] = [];
   selectedPokemon: Pokemon | null = null;
+  elementRef: any;
+  canLoadMore: boolean = true;
 
   constructor(
     private pokeDataService: PokeDataService,
     private eventManager: EventManagerService,
+    private scrollService: ScrollService,
     ) {
-    eventManager.searchQuery.subscribe(this.searchQuery.bind(this))
+    eventManager.searchQuery.subscribe(this.searchQuery.bind(this));
+    eventManager.toPage.subscribe(this.toPage.bind(this));
   }
 
     ngOnInit() {
       this.getFirstPokemon();
     }
 
+
+    toPage(index: number) {
+      if (index == 0) {
+        this.getFirstPokemon();
+      }
+    }
 
     // Populate with at least 9 pokemon
     // ----------------------------------------------------------------------------------
@@ -37,11 +48,47 @@ export class PokemonListComponent {
         (pokemons: Pokemon[]) => {
         this.pokeList = pokemons;
       });
+    }
 
-      for (let i = 0; i < this.pokeList.length; i++) {
-        const element = this.pokeList[i];
-        console.log(element);
+    @HostListener('window:scroll', ['$event'])
+    onScroll(event: Event): void {
+      const target = event.target as Document;
+      const scrollEvent: ScrollEvent = {
+        scrollTop: target.documentElement.scrollTop || target.body.scrollTop,
+        scrollHeight: target.documentElement.scrollHeight || target.body.scrollHeight,
+        clientHeight: target.documentElement.clientHeight || target.body.clientHeight
+      };
+    
+      this.scrollService.getScrollEvent().next(scrollEvent);
+
+      // calc distance to bottom
+      const distanceToBottom = scrollEvent.scrollHeight - (scrollEvent.scrollTop + scrollEvent.clientHeight);
+    
+      // distance is in pixels
+      if (this.canLoadMore && distanceToBottom <= 64) {
+        this.canLoadMore = false;
+        console.log('Reached the bottom of the page. Loading more Pokémon.');
+        this.loadMorePokemon();
+        setTimeout(() => {
+          this.canLoadMore = true; // Re-enable loading more Pokémon after 0.1 seconds
+        }, 100);
       }
+    }
+
+
+    loadMorePokemon() {
+      const startIndex = this.pokeList.length + 1;
+      const endIndex = startIndex + 15;
+    
+      this.loadPokemonInRange(startIndex, endIndex);
+    }
+
+    private loadPokemonInRange(start: number, end: number) {
+      this.pokeDataService.getPokemonsInRange(start, end).subscribe(
+        (pokemons: Pokemon[]) => {
+          this.pokeList.push(...pokemons);
+        }
+      );
     }
 
 
@@ -78,9 +125,9 @@ export class PokemonListComponent {
         return;
       }
 
-      // If the query contains a range in the format "start-end"
-      const rangeRegex = /^(\d+)-(\d+)$/;
-      const rangeRegexSpace = /^(\d+) (\d+)$/;
+      
+      const rangeRegex = /^(\d+)-(\d+)$/;       // query for ex: 1-151
+      const rangeRegexSpace = /^(\d+) (\d+)$/;  // query for ex: 1 151
       const rangeMatch = query.match(rangeRegex) || query.match(rangeRegexSpace);
       if (rangeMatch) {
         const start = parseInt(rangeMatch[1]);

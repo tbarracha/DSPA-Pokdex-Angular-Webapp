@@ -46,6 +46,10 @@ body {
     align-items: center;
 }
 
+.pointable {
+    cursor: pointer;
+}
+
 .header {
     display: flex;
     justify-content: center;
@@ -86,6 +90,7 @@ input {
 .content {
     display: flex;
     height: 100%;
+    width: 100%;
 }
 
 .pokemon-list {

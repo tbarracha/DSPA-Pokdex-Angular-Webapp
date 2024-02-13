@@ -7,16 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class ShinyPokemonGuard implements CanActivate {
 
-  static isShinyModeActivated: boolean = false;
+  isShinyModeActivated: boolean = false;
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return ShinyPokemonGuard.isShinyModeActivated;
+    return this.isShinyModeActivated;
   }
 
-  static toggleShinyMode() {
-    ShinyPokemonGuard.isShinyModeActivated = !ShinyPokemonGuard.isShinyModeActivated;
-    console.log("Shiny mode toggled. New mode: " + ShinyPokemonGuard.isShinyModeActivated);
+  toggleShinyMode() {
+    this.isShinyModeActivated = !this.isShinyModeActivated;
+    console.log("Shiny mode toggled. New mode: " + this.isShinyModeActivated);
   }
 }
