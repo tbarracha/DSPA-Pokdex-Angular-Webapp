@@ -290,7 +290,7 @@ input {
     border-radius: 16px;
 }
 
-.credit-text {
+.credits-text {
     color: $grayLight;
     position: absolute;
     bottom: 0;
@@ -305,4 +305,21 @@ input {
     margin-bottom: 8px;
     margin-left: 16px;
     margin-right: 16px;
+}
+
+.credits-main {
+    color: $black;
+    margin-bottom: 32px;
+}
+
+.credits-secondary {
+    display: inline-flex;
+    color: #868585;
+    margin-bottom: 32px;
+    width: 100%;
+}
+
+.credits-secondary-column {
+    flex: auto;
+    width: 50vh;
 }

@@ -46,15 +46,13 @@ export class PokemonListComponent {
     // Populate with at least 9 pokemon
     // ----------------------------------------------------------------------------------
     getFirstPokemon() {
+      const rand: number = this.getRandomInt(1, 1025);
+      let p: Pokemon;
+      this.pokeDataService.getPokemonById(rand).subscribe((pokemon: Pokemon) => this.confirmPokemonSelection(pokemon));
+
       this.pokeDataService.getPokemonsInRange(1, 9).subscribe(
         (pokemons: Pokemon[]) => {
         this.pokeList = pokemons;
-        if (this.selectedPokemon == null)
-        {
-          console.log("Pokemon is null!");
-          const rand: number = this.getRandomInt(1, 9);
-          this.confirmPokemonSelection(this.pokeList[rand]);
-        }
       });
     }
 
